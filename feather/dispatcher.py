@@ -1,4 +1,3 @@
-#import asyncore
 from collections import defaultdict
 from Queue import Empty
 from multiprocessing import Queue
@@ -30,10 +29,5 @@ class Dispatcher(object):
                 continue
         except Empty:
             return
-
-        
-
-        
-        
 
         
