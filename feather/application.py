@@ -9,7 +9,7 @@ class Application(object):
     plugins.
 
     Applications expect, at the least, a Plugin that listens for 'APP_START',
-    and one that generates 'APP_END'
+    and one that generates 'APP_STOP'
     """
 
     def __init__(self, messages):
@@ -22,7 +22,7 @@ class Application(object):
         self.needed_listeners.add('APP_START')
 
         self.needed_messengers = set(messages)
-        self.needed_messengers.add('APP_END')
+        self.needed_messengers.add('APP_STOP')
 
         self.valid = False
 
