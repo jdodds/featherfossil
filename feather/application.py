@@ -1,4 +1,3 @@
-import collections
 from feather.dispatcher import Dispatcher
 
 class InvalidApplication(Exception):
