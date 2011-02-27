@@ -29,15 +29,5 @@ class DispatcherTest(unittest.TestCase):
     def setUp(self):
         self.dis = Dispatcher()
         self.printfoo = PrintFoo()
-        
 
-    def test_start(self):
-        self.dis.start()
 
-if __name__ == '__main__':
-    a = Application(['CALL_FOO', 'FOO'])
-    pf = PrintFoo()
-    sf = SendFoo()
-    a.register(pf)
-    a.register(sf)
-    a.start()

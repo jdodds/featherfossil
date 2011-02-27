@@ -39,5 +39,5 @@ class PluginTest(unittest.TestCase):
             ("foo", None),
             ('sdf', set(['asdf'])))
         
-#        starmap(assertBad, bad_vals)
-#        starmap(assertGood, good_vals)
+        starmap(assertBad, bad_vals)
+        starmap(assertGood, good_vals)
