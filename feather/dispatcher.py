@@ -1,8 +1,5 @@
 from collections import defaultdict
-from Queue import Empty
 from multiprocessing import Queue
-
-import sys
 
 class Dispatcher(object):
     def __init__(self):
