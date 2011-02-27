@@ -1,6 +1,9 @@
 import collections
 from feather.dispatcher import Dispatcher
 
+class InvalidApplication(Exception):
+    pass
+
 class Application(object):
 
     def __init__(self, commands):
@@ -24,5 +27,11 @@ class Application(object):
         self.dispatcher.register(plugin)
 
     def start(self):
+        if not self.valid:
+            err = ("\nMessengers and listeners that still need set:\n\n"
+                   "messengers : %s\n\n"
+                   "listeners : %s\n") 
+            raise InvalidApplication(err % (self.needed_messengers,
+                                            self.needed_listeners))
         self.dispatcher.start()
         
