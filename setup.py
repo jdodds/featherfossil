@@ -1,26 +1,33 @@
-from setuptools import setup, find_packages
-import sys, os
+#!/usr/bin/env python
+import distribute_setup
+distribute_setup.use_setuptools()
 
-version = '0.1'
+from setuptools import setup, find_packages
 
 setup(name='feather',
-      version=version,
-      description="A framework for developing small, extensible applications",
-      long_description="""\
-""",
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='',
+      version='0.9.0',
+      setup_requires = ['setuptools_git >= 0.3'],
+      packages=find_packages(),
+      include_package_data=False,
+      description="A small framework for developing small plugin-based applications",
+#      long_description=open('README').read(),
+      classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Plugins',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Software Development',
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
+        'Topic :: Software Development :: Libraries :: Python Modules'
+        ], 
+      keywords='framework plugins plugin frameworks multiprocessing',
       author='Jeremiah Dodds',
       author_email='jeremiah.dodds@gmail.com',
-      url='',
+      url='https://github.com/jdodds/feather',
+      download_url='https://github.com/jdodds/feather/downloads',
       license='BSD',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      include_package_data=True,
-      zip_safe=True,
-      install_requires=[
-          # -*- Extra requirements: -*-
-      ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      zip_safe=True
       )
