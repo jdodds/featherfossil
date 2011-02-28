@@ -10,7 +10,7 @@ setup(name='feather',
       packages=find_packages(),
       include_package_data=False,
       description="A small framework for developing small plugin-based applications",
-#      long_description=open('README').read(),
+#      long_description=open('README.md').read(),
       classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Plugins',
