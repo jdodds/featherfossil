@@ -1,4 +1,5 @@
 from multiprocessing import Process, Queue
+
 class InvalidArguments(ValueError):
     pass
 
