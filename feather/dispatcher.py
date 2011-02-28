@@ -35,17 +35,13 @@ class Dispatcher(object):
             message, payload = self.messages.get()
             if message == 'APP_STOP':
                 for plugin in self.plugins:
-                    print 'shutting down %s' % plugin
                     plugin.recieve('SHUTDOWN')
                 self.alive = False
             else:
                 self.recieve(message, payload)
 
     def recieve(self, message, payload=None):
-        print 'got %s %s' % (message, payload)
-        print 'have %d listeners to send to' % len(self.listeners[message])
         for listener in self.listeners[message]:
-            print 'sending to %s' % listener
             listener.recieve(message, payload)
 
 
