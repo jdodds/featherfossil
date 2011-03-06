@@ -8,9 +8,14 @@ class Plugin(Process):
     process, and runs via listening for messages and sending messages through
     Queues.
     """
-    listeners = None
-    messengers = None
+    listeners = set(['SHUTDOWN'])
+    messengers = set([])
     name = 'Base Plugin'
+
+    def __new__(cls, *args, **kwargs):
+        plug = super(Plugin, cls).__new__(cls, *args, **kwargs)
+        plug.listeners.update(Plugin.listeners)
+        return plug
 
     def __init__(self):
         """Set us up to run as a separate process, initialze our listener Queue,
@@ -20,9 +25,9 @@ class Plugin(Process):
         self.listener = Queue()
         self.runnable = True
 
-    def set_messenger(self, messenger):
-        """Set our messenger"""
-        self.messenger = messenger
+    # def set_messenger(self, messenger):
+    #     """Set our messenger"""
+    #     self.messenger = messenger
 
     def send(self, message, payload=None):
         """Send a message through our messenger Queue.
@@ -37,15 +42,54 @@ class Plugin(Process):
         """
         self.listener.put((message, payload))
 
-    def shutdown(self, payload):
+    def SHUTDOWN(self, payload):
         """Set self.runnable to false.
         This should cause a subclass to break out of it's run loop.
         """
         self.runnable=False
 
+    def pre_run(self):
+        """Code to be run before our run loop starts"""
+        pass
+
+    def pre_call_message(self):
+        """Code to be run before calling a message handler"""
+        pass
+
+    def pre_first_call_message(self):
+        """Code to be run before calling the first message handler"""
+
+    def post_first_call_message(self):
+        """Code to be run after the first message has been handled"""
+        pass
+
+    def post_call_message(self):
+        """Code to be run after a message has been handled"""
+        pass
+
+    def post_run(self):
+        """Code to be run after our run loop terminates"""
+        pass
+        
     def run(self):
-        """This should be implemented by subclasses, and currently should loop
-        until self.runnable is no longer true.
+        """Run our loop, and any defined hooks...
         """
-        raise NotImplementedError()
+        self.pre_run()
+        first = True
+        while self.runnable:
+            self.pre_call_message()
+
+            if first:
+                self.pre_first_call_message()
+            
+            message, payload = self.listener.get()
+            getattr(self, message)(payload)
+
+            if first:
+                first = False
+                self.post_first_call_message()
+                
+            self.post_call_message()
+
+        self.post_run()
 

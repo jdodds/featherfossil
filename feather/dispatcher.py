@@ -21,7 +21,7 @@ class Dispatcher(object):
         for listener in plugin.listeners:
             self.listeners[listener].add(plugin)
         self.plugins.add(plugin)
-        plugin.set_messenger(self.messages)
+        plugin.messenger = self.messages
         plugin.start()
 
     def start(self):
