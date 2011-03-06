@@ -25,10 +25,6 @@ class Plugin(Process):
         self.listener = Queue()
         self.runnable = True
 
-    # def set_messenger(self, messenger):
-    #     """Set our messenger"""
-    #     self.messenger = messenger
-
     def send(self, message, payload=None):
         """Send a message through our messenger Queue.
         Messages are presumably descriptions of a task that just got completed,
