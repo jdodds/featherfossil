@@ -5,12 +5,12 @@ distribute_setup.use_setuptools()
 from setuptools import setup, find_packages
 
 setup(name='feather',
-      version='0.9.0',
+      version='0.9.1',
       setup_requires = ['setuptools_git >= 0.3'],
       packages=find_packages(),
       include_package_data=False,
       description="A small framework for developing small plugin-based applications",
-#      long_description=open('README.md').read(),
+      long_description=open('README').read(),
       classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Plugins',
